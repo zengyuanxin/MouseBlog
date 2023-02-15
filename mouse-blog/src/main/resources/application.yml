@@ -24,3 +24,7 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
       id-type: auto
+oss:
+  accessKeyId: LTAI5tAxcWxXwQhi6dPpdFqY
+  accessKeySecret: h35w5iS0x9kZZv2Yta0ZDpmf7XYvOE
+  bucketName: mouse-blog
