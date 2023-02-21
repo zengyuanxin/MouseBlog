@@ -29,6 +29,6 @@ public interface MenuService extends IService<Menu> {
 
     ResponseResult deleteMenuById(Long menuId);
 
-//    ResponseResult treeselect();
+    ResponseResult treeselect();
 }
 

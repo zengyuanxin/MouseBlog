@@ -9,7 +9,9 @@ import com.mouse.domain.dto.MenuDto;
 import com.mouse.domain.dto.MenuTreeDto;
 import com.mouse.domain.entity.Article;
 import com.mouse.domain.entity.Menu;
+import com.mouse.domain.vo.MenuTreeVo;
 import com.mouse.domain.vo.MenuVo;
+import com.mouse.domain.vo.RoutersVo;
 import com.mouse.enums.AppHttpCodeEnum;
 import com.mouse.exception.SystemException;
 import com.mouse.mapper.MenuMapper;
@@ -153,19 +155,33 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     }
 
-//    @Override
-//    public ResponseResult treeselect() {
+    @Override
+    public ResponseResult treeselect() {
 //        //查询menu 结果是tree的形式
+////        List<Menu> menus = menuService.selectRouterMenuTreeByUserId(SecurityUtils.getUserId());
+//        List<Menu> menus = selectRouterMenuTreeByUserId(SecurityUtils.getUserId());
 //
-//        List<Menu> menus = menuService.selectRouterMenuTreeByUserId(SecurityUtils.getUserId());
 //        List<MenuTreeDto> menuTreeDtos = BeanCopyUtils.copyBeanList(menus, MenuTreeDto.class);
+//
 //        //将MenuName赋值到Label
 //        for (int i=0;i<menus.size();i++){
 //            menuTreeDtos.get(i).setLabel(menus.get(i).getMenuName());
 //        }
 //        //封装数据返回
-//        return ResponseResult.okResult();
-//    }
+//        return ResponseResult.okResult(menuTreeDtos);
+        List<Menu> menus = menuMapper.selectList(null);
+        List<MenuTreeDto> treeVos = menus.stream().map(menu -> new MenuTreeDto(new ArrayList<>(), menu.getId(), menu.getMenuName(), menu.getParentId())).collect(Collectors.toList());
+        List<MenuTreeDto> menuTree = buildTreeMenuTree(treeVos, 0L);
+        return  ResponseResult.okResult(menuTree);
+    }
+
+    private List<MenuTreeDto> buildTreeMenuTree(List<MenuTreeDto> menus, Long parentId) {
+        return menus.stream()
+                .filter(menu -> parentId.equals(menu.getParentId()))
+                //获取该菜单下的子菜单，并设置到children属性中
+                .map(menu -> menu.setChildren(getChildrenMenusTree(menu,menus)))
+                .collect(Collectors.toList());
+    }
 
     private List<Menu> builderMenuTree(List<Menu> menus, Long parentId) {
         List<Menu> menuTree = menus.stream()
@@ -187,6 +203,15 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                 .map(m->m.setChildren(getChildren(m,menus)))
                 .collect(Collectors.toList());
         return childrenList;
+    }
+    private List<MenuTreeDto> getChildrenMenusTree(MenuTreeDto menu, List<MenuTreeDto> menus) {
+        return menus.stream()
+                .filter(m ->m.getParentId().equals(menu.getId()))
+                //考虑到三级甚至多级菜单的情况下，
+                // 需要继续找到子菜单的子菜单...并设置children属性,
+                // 于是这里继续遍历每个菜单，寻找其子菜单并添加，调用自身的找子菜单方法，实现递归
+                .map(m -> m.setChildren(getChildrenMenusTree(m,menus)))
+                .collect(Collectors.toList());
     }
 
 

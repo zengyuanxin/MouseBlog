@@ -4,6 +4,7 @@ import com.mouse.domain.entity.Menu;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -14,13 +15,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain = true)
 public class MenuTreeDto {
 //    children":[],
 //    "id":"2023",
 //    "label":"写博文",
 //    "parentId":"0"
 
-    private List<MenuTreeDto> menus;
+    private List<MenuTreeDto> children;
     private Long id;
     private String label;
     private Long parentId;
