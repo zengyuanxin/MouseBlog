@@ -202,6 +202,15 @@ public class RedisCache
     }
 
     /**
+     * 自增某个数值
+     * @param key 结构名
+     * @param hKey 要自增的数据
+     * @param v 自增的值
+     */
+    public void incrementCacheMapValue(String key,String hKey,int v){
+        redisTemplate.opsForHash().increment(key,hKey,v);
+    }
+    /**
      * 删除Hash中的数据
      * 
      * @param key

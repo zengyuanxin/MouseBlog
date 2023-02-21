@@ -3,6 +3,9 @@ package com.mouse.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mouse.domain.ResponseResult;
 import com.mouse.domain.entity.Category;
+import com.mouse.domain.vo.CategoryVo;
+
+import java.util.List;
 
 
 /**
@@ -14,5 +17,7 @@ import com.mouse.domain.entity.Category;
 public interface CategoryService extends IService<Category> {
 
     ResponseResult getCategoryList();
+
+    List<CategoryVo> listAllCategory();
 }
 

@@ -78,7 +78,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     public ResponseResult addComment(Comment comment) {
         //评论内容不能为空、敏感词设置等
         if (!StringUtils.hasText(comment.getContent())){
-            throw new SystemException(AppHttpCodeEnum.CONTENT_NOT_NULL);
+            throw new SystemException(AppHttpCodeEnum.CONTENT_CANNOT_NULL);
         }
         save(comment);
         return ResponseResult.okResult();

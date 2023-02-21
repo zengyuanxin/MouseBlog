@@ -6,6 +6,7 @@ import com.mouse.constants.SystemConstants;
 import com.mouse.domain.ResponseResult;
 import com.mouse.domain.entity.Article;
 import com.mouse.domain.entity.Category;
+import com.mouse.domain.vo.CategoryAdminVo;
 import com.mouse.domain.vo.CategoryVo;
 import com.mouse.mapper.CategoryMapper;
 import com.mouse.service.ArticleService;
@@ -30,6 +31,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @Override
     public ResponseResult getCategoryList() {
         //查询文章表 状态为已发布的文章
@@ -50,6 +54,15 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         List<CategoryVo> categoryVos = BeanCopyUtils.copyBeanList(categories, CategoryVo.class);
 
         return ResponseResult.okResult(categoryVos);
+    }
+
+    @Override
+    public List<CategoryVo> listAllCategory() {
+        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Category::getStatus, SystemConstants.NORMAL);
+        List<Category> list = list(wrapper);
+        List<CategoryVo> categoryVos = BeanCopyUtils.copyBeanList(list, CategoryVo.class);
+        return categoryVos;
     }
 }
 

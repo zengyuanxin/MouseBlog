@@ -1,8 +1,10 @@
 package com.mouse.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.mouse.constants.SystemConstants;
 import com.mouse.domain.entity.LoginUser;
 import com.mouse.domain.entity.User;
+import com.mouse.mapper.MenuMapper;
 import com.mouse.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -17,6 +20,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private MenuMapper menuMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -29,7 +35,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("用户不存在");
         }
         //返回用户信息
-        // TODO 查询权限信息封装
-        return new LoginUser(user);
+        //后台才需要查询权限
+        if (user.getType().equals(SystemConstants.ADMIN)){
+            List<String> list = menuMapper.selectPermsByUserId(user.getId());
+            return new LoginUser(user,list);
+        }
+        return new LoginUser(user,null);
     }
 }
