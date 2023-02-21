@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.mouse.domain.ResponseResult;
 import com.mouse.domain.dto.RoleDto;
 import com.mouse.domain.entity.Role;
+import com.mouse.domain.vo.AddRole;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,5 +26,7 @@ public interface RoleService extends IService<Role> {
     ResponseResult changeStatus(RoleDto roleDto);
 
     ResponseResult getRoleById(Long id);
+
+    ResponseResult addRole(AddRole addRole);
 }
 

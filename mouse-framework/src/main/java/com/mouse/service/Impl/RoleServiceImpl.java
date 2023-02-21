@@ -8,14 +8,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mouse.constants.SystemConstants;
 import com.mouse.domain.ResponseResult;
 import com.mouse.domain.dto.RoleDto;
-import com.mouse.domain.entity.Menu;
-import com.mouse.domain.entity.Role;
-import com.mouse.domain.entity.Tag;
-import com.mouse.domain.entity.User;
+import com.mouse.domain.entity.*;
+import com.mouse.domain.vo.AddRole;
 import com.mouse.domain.vo.PageVo;
 import com.mouse.domain.vo.RoleVo;
 import com.mouse.mapper.RoleMapper;
+import com.mouse.mapper.RoleMenuMapper;
+import com.mouse.service.RoleMenuService;
 import com.mouse.service.RoleService;
+import com.mouse.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -38,6 +39,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Autowired
     private RoleMapper roleMapper;
+
+    @Autowired
+    private RoleMenuMapper roleMenuMapper;
+
+    @Autowired
+    private RoleMenuService roleMenuService;
 
     @Override
     public List<String> selectRoleKeyByUserId(Long id) {
@@ -94,6 +101,21 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     public ResponseResult getRoleById(Long id) {
         Role role = roleMapper.selectById(id);
         return ResponseResult.okResult(role);
+    }
+
+    @Override
+    public ResponseResult addRole(AddRole newRole) {
+        //新增 角色
+        Role role = BeanCopyUtils.copyBean(newRole, Role.class);
+        roleMapper.insert(role);
+        //新增 角色_菜单
+        List<Long> menuIds = newRole.getMenuIds();
+        for (int i=0;i<menuIds.size();i++){
+            RoleMenu roleMenu = new RoleMenu(role.getId(), menuIds.get(i));
+            roleMenuService.save(roleMenu);
+        }
+
+        return ResponseResult.okResult();
     }
 }
 

@@ -2,6 +2,8 @@ package com.mouse.controller;
 
 import com.mouse.domain.ResponseResult;
 import com.mouse.domain.dto.RoleDto;
+import com.mouse.domain.entity.Role;
+import com.mouse.domain.vo.AddRole;
 import com.mouse.domain.vo.RoleVo;
 import com.mouse.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,10 @@ public class RoleController {
     @PutMapping("/changeStatus")
     public ResponseResult changeStatus(@RequestBody RoleDto roleDto){
         return roleService.changeStatus(roleDto);
+    }
+    @PostMapping
+    public ResponseResult addRole(@RequestBody AddRole addRole){
+        return roleService.addRole(addRole);
     }
 
 }
