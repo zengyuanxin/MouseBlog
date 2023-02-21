@@ -22,7 +22,7 @@ import java.io.InputStream;
  */
 @SpringBootTest(classes = MouseBlogApplication.class)
 /**
- * 如果测试类和启动类在同一个包下(classes = MouseBlogApplication.class)可以省略
+ * 如果测试类和启动类在同一个包下(classes = TestRunner.class)可以省略
  */
 @Component
 //@ConfigurationProperties(prefix = "oss")

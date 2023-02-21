@@ -1,0 +1,99 @@
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c1a05c2] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@606306327 wrapping com.mysql.cj.jdbc.ConnectionImpl@7b2e43dd] will not be managed by Spring
+==>  Preparing: SELECT id,title,content,summary,category_id,thumbnail,is_top,status,view_count,is_comment,create_by,create_time,update_by,update_time,del_flag FROM mouse_article WHERE del_flag=0 AND (status = ?)
+==> Parameters: 0(Integer)
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4db01b50] was not registered for synchronization because synchronization is not active
+<==    Columns: id, title, content, summary, category_id, thumbnail, is_top, status, view_count, is_comment, create_by, create_time, update_by, update_time, del_flag
+<==        Row: 1, SpringSecurity从入门到精通, <<BLOB>>, SpringSecurity框架教程-Spring Security+JWT实现项目级前端分离认证授权, 1, https://sg-blog-oss.oss-cn-beijing.aliyuncs.com/2022/01/31/948597e164614902ab1662ba8452e106.png, 1, 0, 132, 0, null, 2022-01-23 23:20:11, null, null, 0
+<==        Row: 5, sdad, <<BLOB>>, null, 2, , 1, 0, 44, 0, null, 2022-01-17 14:58:37, null, null, 0
+<==        Row: 8, 1, <<BLOB>>, 2, 1, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/6cbbdabbd80c48058c75934519d2e503.png, 1, 0, 0, 0, null, null, null, null, 0
+<==        Row: 9, a, <<BLOB>>, b, 1, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/6302c0932d82429b80e873247df22a80.png, 1, 0, 0, 0, 1, 2023-02-19 12:09:25, 1, 2023-02-19 12:09:25, 0
+<==        Row: 10, A, <<BLOB>>, B, 2, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/b0f03038ad394051a0e83643b29a5d47.png, 1, 0, 0, 0, 1, 2023-02-19 12:22:05, 1, 2023-02-19 12:22:05, 0
+<==        Row: 11, `21212121, <<BLOB>>, 2121212, 2, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/63d809862d1e4bda9dc3e51e9e95ac06.png, 0, 0, 0, 0, 1, 2023-02-19 13:11:19, 1, 2023-02-19 13:11:19, 0
+<==        Row: 12, llll, <<BLOB>>, llll, 2, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/f45a118f540d4e5d9a9050b34184c14d.png, 1, 0, 0, 0, 1, 2023-02-19 13:12:20, 1, 2023-02-19 13:12:20, 0
+<==        Row: 13, oooo, <<BLOB>>, oooo, 15, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/529a798ac2694f63b2df848c48dec8e3.png, 0, 0, 0, 0, 1, 2023-02-19 13:21:57, 1, 2023-02-19 13:21:57, 0
+<==        Row: 14, bdf, <<BLOB>>, gsgs, 15, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/b59000b09273419690126c2616512d01.png, 1, 0, 0, 0, 1, 2023-02-19 13:24:17, 1, 2023-02-19 13:24:17, 0
+<==      Total: 9
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c1a05c2]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45c0526d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2034789122 wrapping com.mysql.cj.jdbc.ConnectionImpl@7b2e43dd] will not be managed by Spring
+==>  Preparing: SELECT id,name,pid,description,status,create_by,create_time,update_by,update_time,del_flag FROM mouse_category WHERE id IN ( ? , ? , ? ) AND del_flag=0
+==> Parameters: 1(Long), 2(Long), 15(Long)
+JDBC Connection [HikariProxyConnection@1549307815 wrapping com.mysql.cj.jdbc.ConnectionImpl@6dfd82c8] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) FROM mouse_article WHERE del_flag = 0 AND (category_id = ? AND status = ?)
+==> Parameters: 1(Long), 0(Integer)
+<==    Columns: id, name, pid, description, status, create_by, create_time, update_by, update_time, del_flag
+<==        Row: 1, java, -1, wsd, 0, null, null, null, null, 0
+<==        Row: 2, PHP, -1, wsd, 0, null, null, null, null, 0
+<==        Row: 15, spring, -1, null, 0, null, null, null, null, 0
+<==      Total: 3
+<==    Columns: COUNT(*)
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45c0526d]
+<==        Row: 3
+<==      Total: 1
+==>  Preparing: SELECT id,title,content,summary,category_id,thumbnail,is_top,status,view_count,is_comment,create_by,create_time,update_by,update_time,del_flag FROM mouse_article WHERE del_flag=0 AND (category_id = ? AND status = ?) ORDER BY is_top DESC,view_count DESC LIMIT ?
+==> Parameters: 1(Long), 0(Integer), 10(Long)
+<==    Columns: id, title, content, summary, category_id, thumbnail, is_top, status, view_count, is_comment, create_by, create_time, update_by, update_time, del_flag
+<==        Row: 1, SpringSecurity从入门到精通, <<BLOB>>, SpringSecurity框架教程-Spring Security+JWT实现项目级前端分离认证授权, 1, https://sg-blog-oss.oss-cn-beijing.aliyuncs.com/2022/01/31/948597e164614902ab1662ba8452e106.png, 1, 0, 132, 0, null, 2022-01-23 23:20:11, null, null, 0
+<==        Row: 8, 1, <<BLOB>>, 2, 1, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/6cbbdabbd80c48058c75934519d2e503.png, 1, 0, 0, 0, null, null, null, null, 0
+<==        Row: 9, a, <<BLOB>>, b, 1, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/6302c0932d82429b80e873247df22a80.png, 1, 0, 0, 0, 1, 2023-02-19 12:09:25, 1, 2023-02-19 12:09:25, 0
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4db01b50]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@72008a8a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@193019119 wrapping com.mysql.cj.jdbc.ConnectionImpl@6dfd82c8] will not be managed by Spring
+==>  Preparing: SELECT id,name,pid,description,status,create_by,create_time,update_by,update_time,del_flag FROM mouse_category WHERE id=? AND del_flag=0
+==> Parameters: 1(Long)
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@32259558] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@672161111 wrapping com.mysql.cj.jdbc.ConnectionImpl@7b2e43dd] will not be managed by Spring
+<==    Columns: id, name, pid, description, status, create_by, create_time, update_by, update_time, del_flag
+==>  Preparing: SELECT id,title,content,summary,category_id,thumbnail,is_top,status,view_count,is_comment,create_by,create_time,update_by,update_time,del_flag FROM mouse_article WHERE del_flag=0 AND (status = ?)
+<==        Row: 1, java, -1, wsd, 0, null, null, null, null, 0
+<==      Total: 1
+==> Parameters: 0(Integer)
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@72008a8a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fdf9880] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@222014416 wrapping com.mysql.cj.jdbc.ConnectionImpl@6dfd82c8] will not be managed by Spring
+==>  Preparing: SELECT id,name,pid,description,status,create_by,create_time,update_by,update_time,del_flag FROM mouse_category WHERE id=? AND del_flag=0
+==> Parameters: 1(Long)
+<==    Columns: id, title, content, summary, category_id, thumbnail, is_top, status, view_count, is_comment, create_by, create_time, update_by, update_time, del_flag
+<==        Row: 1, SpringSecurity从入门到精通, <<BLOB>>, SpringSecurity框架教程-Spring Security+JWT实现项目级前端分离认证授权, 1, https://sg-blog-oss.oss-cn-beijing.aliyuncs.com/2022/01/31/948597e164614902ab1662ba8452e106.png, 1, 0, 132, 0, null, 2022-01-23 23:20:11, null, null, 0
+<==    Columns: id, name, pid, description, status, create_by, create_time, update_by, update_time, del_flag
+<==        Row: 1, java, -1, wsd, 0, null, null, null, null, 0
+<==      Total: 1
+<==        Row: 5, sdad, <<BLOB>>, null, 2, , 1, 0, 44, 0, null, 2022-01-17 14:58:37, null, null, 0
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fdf9880]
+<==        Row: 8, 1, <<BLOB>>, 2, 1, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/6cbbdabbd80c48058c75934519d2e503.png, 1, 0, 0, 0, null, null, null, null, 0
+<==        Row: 9, a, <<BLOB>>, b, 1, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/6302c0932d82429b80e873247df22a80.png, 1, 0, 0, 0, 1, 2023-02-19 12:09:25, 1, 2023-02-19 12:09:25, 0
+Creating a new SqlSession
+<==        Row: 10, A, <<BLOB>>, B, 2, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/b0f03038ad394051a0e83643b29a5d47.png, 1, 0, 0, 0, 1, 2023-02-19 12:22:05, 1, 2023-02-19 12:22:05, 0
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7345b90f] was not registered for synchronization because synchronization is not active
+<==        Row: 11, `21212121, <<BLOB>>, 2121212, 2, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/63d809862d1e4bda9dc3e51e9e95ac06.png, 0, 0, 0, 0, 1, 2023-02-19 13:11:19, 1, 2023-02-19 13:11:19, 0
+JDBC Connection [HikariProxyConnection@602991004 wrapping com.mysql.cj.jdbc.ConnectionImpl@6dfd82c8] will not be managed by Spring
+<==        Row: 12, llll, <<BLOB>>, llll, 2, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/f45a118f540d4e5d9a9050b34184c14d.png, 1, 0, 0, 0, 1, 2023-02-19 13:12:20, 1, 2023-02-19 13:12:20, 0
+==>  Preparing: SELECT id,name,pid,description,status,create_by,create_time,update_by,update_time,del_flag FROM mouse_category WHERE id=? AND del_flag=0
+==> Parameters: 1(Long)
+<==        Row: 13, oooo, <<BLOB>>, oooo, 15, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/529a798ac2694f63b2df848c48dec8e3.png, 0, 0, 0, 0, 1, 2023-02-19 13:21:57, 1, 2023-02-19 13:21:57, 0
+<==        Row: 14, bdf, <<BLOB>>, gsgs, 15, http://mouse-blog.oss-cn-guangzhou.aliyuncs.com/2023/02/19/b59000b09273419690126c2616512d01.png, 1, 0, 0, 0, 1, 2023-02-19 13:24:17, 1, 2023-02-19 13:24:17, 0
+<==      Total: 9
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@32259558]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78fee0f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@421410035 wrapping com.mysql.cj.jdbc.ConnectionImpl@7b2e43dd] will not be managed by Spring
+==>  Preparing: SELECT id,name,pid,description,status,create_by,create_time,update_by,update_time,del_flag FROM mouse_category WHERE id IN ( ? , ? , ? ) AND del_flag=0
+==> Parameters: 1(Long), 2(Long), 15(Long)
+<==    Columns: id, name, pid, description, status, create_by, create_time, update_by, update_time, del_flag
+<==        Row: 1, java, -1, wsd, 0, null, null, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7345b90f]
+<==    Columns: id, name, pid, description, status, create_by, create_time, update_by, update_time, del_flag
+<==        Row: 1, java, -1, wsd, 0, null, null, null, null, 0
+<==        Row: 2, PHP, -1, wsd, 0, null, null, null, null, 0
+<==        Row: 15, spring, -1, null, 0, null, null, null, null, 0
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78fee0f]

@@ -1,5 +1,6 @@
 package com.mouse.controller;
 
+import com.mouse.annotation.SystemLog;
 import com.mouse.domain.ResponseResult;
 import com.mouse.domain.entity.User;
 import com.mouse.service.UserService;
@@ -19,6 +20,8 @@ public class UserController {
     }
 
     @PutMapping("/userInfo")
+    @SystemLog(BusinessName = "更新用户信息")
+
     public ResponseResult updateUserInfo(@RequestBody User user){
         return userService.updateUserInfo(user);
     }
